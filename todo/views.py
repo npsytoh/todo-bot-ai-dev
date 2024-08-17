@@ -24,3 +24,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+class TodoDeleteView(generic.DeleteView):
+    model = TodoItems
+    success_url = reverse_lazy('todo-main')
