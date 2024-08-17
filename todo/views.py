@@ -3,6 +3,7 @@ from django.views import generic
 
 from .models import TodoItems
 from .forms import TodoCreateModelForm
+from .forms import TodoUpdateModelForm
 
 
 class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
@@ -25,6 +26,13 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
         else:
             return self.form_invalid(form)
 
+class TodoUpdateView(generic.UpdateView):
+    model = TodoItems
+    form_class = TodoUpdateModelForm
+    template_name = 'todo/todo-update.html'
+    success_url = reverse_lazy('todo-main')
+
 class TodoDeleteView(generic.DeleteView):
     model = TodoItems
     success_url = reverse_lazy('todo-main')
+    http_method_names = ['post']

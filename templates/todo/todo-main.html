@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock title %}
+{% block title %}ToDoBot AI - ホーム{% endblock title %}
 
 {% block main %}
   <div class="container-fluid">
@@ -20,8 +20,7 @@
             <tr>
               <th scope="col" style="width: 5%"></th>
               <th scope="col"></th>
-              <th scope="col" style="width: 8%"></th>
-              <th scope="col" style="width: 8%"></th>
+              <th scope="col" style="width: 15%"></th>
             </tr>
           </thead>
           <tbody>
@@ -29,13 +28,11 @@
               <tr>
                 <td><input class="form-check-input" type="checkbox" id="checkbox-{{ todo.pk }}" value="" aria-label="..."></td>
                 <td>{{ todo.title }}</td>
-                <td>
-                  <button class="btn btn-secondary">
-                    <a href="#">編集</a>
+                <td class="row">
+                  <button class="col-auto btn btn-secondary">
+                    <a href="{% url 'todo-update' todo.pk %}">編集</a>
                   </button>
-                </td>
-                <td>
-                  <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
+                  <form class="col-auto" method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
                     <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
                   </form>
                 </td>
