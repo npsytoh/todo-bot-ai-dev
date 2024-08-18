@@ -7,7 +7,10 @@ class TodoCreateModelForm(forms.ModelForm):
         model = TodoItems
         fields = ['title']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'タスクを入力...',
+            }),
         }
 
 class TodoUpdateModelForm(forms.ModelForm):

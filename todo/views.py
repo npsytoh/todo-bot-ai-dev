@@ -26,6 +26,20 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
         else:
             return self.form_invalid(form)
 
+class TodoCheckToggleView(generic.UpdateView):
+    model = TodoItems
+    fields = ['is_completed']
+    success_url = reverse_lazy('todo-main')
+    http_method_names = ['post']
+
+    def form_valid(self, form):
+        print(self.request.POST)
+        post = form.save(commit=False)
+        post.is_completed = True
+        post.save()
+        return super().form_valid(form)
+    
+
 class TodoUpdateView(generic.UpdateView):
     model = TodoItems
     form_class = TodoUpdateModelForm
