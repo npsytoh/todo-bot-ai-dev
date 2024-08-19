@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .models import TodoItems
+from .forms import TodoCompletedModelForm
 from .forms import TodoCreateModelForm
 from .forms import TodoUpdateModelForm
 
@@ -12,6 +13,16 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
     template_name = 'todo/todo-main.html'
     context_object_name = 'todo_lists'
     success_url = reverse_lazy('todo-main')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form_item"] = TodoCompletedModelForm(self.request.POST or None)
+        return context
+
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     print(form.instance.pk)
+    #     return response
 
     def get(self, request, *args, **kwargs):
         self.object = None
@@ -38,7 +49,6 @@ class TodoCheckToggleView(generic.UpdateView):
         post.is_completed = True
         post.save()
         return super().form_valid(form)
-    
 
 class TodoUpdateView(generic.UpdateView):
     model = TodoItems

@@ -2,6 +2,16 @@ from django import forms
 from .models import TodoItems
 
 
+class TodoCompletedModelForm(forms.ModelForm):
+    class Meta:
+        model = TodoItems
+        fields = ['is_completed']
+        widgets = {
+            'is_completed': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            })
+        }
+
 class TodoCreateModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
@@ -19,5 +29,8 @@ class TodoUpdateModelForm(forms.ModelForm):
         exclude = ['is_completed']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'メモを入力...',
+            }),
         }

@@ -12,12 +12,13 @@
               {{ form.title }}
             </span>
           </form>
-          <button class="col-auto btn btn-primary" type="submit">登録</button>
+          <button class="col-auto btn btn-primary" type="submit">追加</button>
         </div>
 
         <table class="table table-hover align-middle">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -27,22 +28,30 @@
               <tr>
                 <td>
                   <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
-                    <input class="form-check-input" type="checkbox" id="todo-checkbox-{{ todo.pk }}" value="">
-                    <label class="form-check-label" id="todo-label-{{ todo.pk }}" for="todo-checkbox-{{ todo.pk }}">
-                      {{ todo.title }}
-                    </label>
-                    <button type="submit">POST</button>
+                    {% comment %} <input class="form-check-input" type="checkbox" id="todo-checkbox-{{ todo.pk }}" value=""> {% endcomment %}
+                    <span id="todo-checkbox-{{ todo.pk }}">
+                      {{ form_item.is_completed }}
+                    </span>
+                    <button class="btn btn-primary" type="submit">POST</button>
                   </form>
                 </td>
-                <td class="row">
-                  <button class="col-auto btn btn-secondary">
-                    <a href="{% url 'todo-update' todo.pk %}">編集</a>
-                  </button>
-                  <form class="col-auto" method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
-                    <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                  </form>
+                <td>
+                  <span id="todo-title-{{ todo.pk }}">
+                    {{ todo.title }}
+                  </span>
+                </td>
+                <td>
+                  <div class="row">
+                    <button class="col-auto btn btn-secondary">
+                      <a href="{% url 'todo-update' todo.pk %}">編集</a>
+                    </button>
+                    <form class="col-auto" method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
+                      <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+                    </form>
+                  </div>
                 </td>
               </tr>
+            {% empty %}
             {% endfor %}
           </tbody>
         </table>
