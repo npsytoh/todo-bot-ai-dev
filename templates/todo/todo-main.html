@@ -29,9 +29,8 @@
                 <td>
                   <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
                     <span id="todo-checkbox-{{ todo.pk }}">
-                      <input type="checkbox" class="form-check-input" name="is_completed_{{ todo.pk }}" {% if todo.is_completed %} checked{% endif %}="checked{% endif %}">
+                      <input type="checkbox" class="form-check-input" name="is_completed_{{ todo.pk }}" {% if todo.is_completed %} checked="checked" {% endif %}>
                     </span>
-                    <button class="btn btn-primary" type="submit">POST</button>
                   </form>
                 </td>
                 <td>
