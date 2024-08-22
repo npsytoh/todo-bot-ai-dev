@@ -1,7 +1,7 @@
 const todoCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 
 const changeClass = (element) => {
-	const todoTitle = document.getElementById(element.id.replace('checkbox', 'title'));
+	const todoTitle = document.getElementById(element.id.replace('status', 'title'));
 	todoTitle.classList.toggle('text-decoration-line-through');
 };
 

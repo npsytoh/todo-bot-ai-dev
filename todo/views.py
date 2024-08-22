@@ -24,7 +24,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
 
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset(**kwargs)
-        queryset = queryset.filter(is_completed=False).order_by('-updated_at')
+        queryset = queryset.filter(status=False).order_by('-updated_at')
         return queryset
 
     def get(self, request, *args, **kwargs):
@@ -48,12 +48,12 @@ class TodoCheckToggleView(generic.FormView):
 
     def post(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        obj = get_object_or_404(TodoItems, pk=pk) 
-        field_name = f'is_completed_{pk}'
+        obj = get_object_or_404(TodoItems, pk=pk)
+        field_name = f'status_{pk}'
         if field_name in request.POST:
-            obj.is_completed = request.POST.get(field_name) == "on"
+            obj.status = request.POST.get(field_name) == "on"
         else:
-            obj.is_completed = False
+            obj.status = False
         obj.save()
         return redirect(self.success_url)
 

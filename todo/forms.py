@@ -5,9 +5,9 @@ from .models import TodoItems
 class TodoCompletedModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
-        fields = ['is_completed']
+        fields = ['status']
         widgets = {
-            'is_completed': forms.CheckboxInput(attrs={
+            'status': forms.CheckboxInput(attrs={
                 'class': 'form-check-input',
             })
         }
@@ -15,9 +15,9 @@ class TodoCompletedModelForm(forms.ModelForm):
 class TodoCreateModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
-        fields = ['title']
+        fields = ['task_title']
         widgets = {
-            'title': forms.TextInput(attrs={
+            'task_title': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'タスクを入力...',
             }),
@@ -26,9 +26,9 @@ class TodoCreateModelForm(forms.ModelForm):
 class TodoUpdateModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
-        exclude = ['is_completed']
+        exclude = ['status']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'task_title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'メモを入力...',

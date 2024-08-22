@@ -9,7 +9,7 @@
         <div class="row todo-create-form">
           <form class="col-auto" method="post">{% csrf_token %}
             <span class="col-auto">
-              {{ form.title }}
+              {{ form.task_title }}
             </span>
           </form>
           <button class="col-auto btn btn-primary" type="submit">追加</button>
@@ -18,7 +18,7 @@
         <table class="table table-hover align-middle">
           <thead>
             <tr>
-              <th scope="col"></th>
+              <th scope="col" style="width: 5%"></th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -28,14 +28,14 @@
               <tr>
                 <td>
                   <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
-                    <span id="todo-checkbox-{{ todo.pk }}">
-                      <input type="checkbox" class="form-check-input" name="is_completed_{{ todo.pk }}" {% if todo.is_completed %} checked="checked" {% endif %}>
+                    <span id="todo-status-{{ todo.pk }}">
+                      <input type="checkbox" class="form-check-input" name="status_{{ todo.pk }}" {% if todo.status %} checked="checked" {% endif %}>
                     </span>
                   </form>
                 </td>
                 <td>
-                  <span class="{% if todo.is_completed %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.pk }}">
-                    {{ todo.title }}
+                  <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.pk }}">
+                    {{ todo.task_title }}
                   </span>
                 </td>
                 <td>
