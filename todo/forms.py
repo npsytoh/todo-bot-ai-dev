@@ -18,7 +18,7 @@ class TodoCreateModelForm(forms.ModelForm):
         fields = ['task_title']
         widgets = {
             'task_title': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control shadow-sm',
                 'placeholder': 'タスクを入力...',
             }),
         }
@@ -26,11 +26,21 @@ class TodoCreateModelForm(forms.ModelForm):
 class TodoUpdateModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
-        exclude = ['status']
+        exclude = [
+            'task_id',
+            'status',
+            'completed_at'
+        ]
         widgets = {
             'task_title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={
+            'task_description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'メモを入力...',
+            }),
+            'is_important': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+            'due_date': forms.TextInput(attrs={
+                'class': 'form-control',
             }),
         }

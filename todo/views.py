@@ -1,3 +1,5 @@
+import datetime as dt
+
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -14,7 +16,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
     model = TodoItems
     form_class = TodoCreateModelForm
     template_name = 'todo/todo-main.html'
-    context_object_name = 'todo_lists'
+    context_object_name = 'todo_list'
     success_url = reverse_lazy('todo-main')
 
     def get_context_data(self, **kwargs):
@@ -25,6 +27,9 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset(**kwargs)
         queryset = queryset.filter(status=False).order_by('-updated_at')
+        for data in queryset:
+            if data.due_date is None:
+                data.due_date = '-'
         return queryset
 
     def get(self, request, *args, **kwargs):
@@ -52,8 +57,10 @@ class TodoCheckToggleView(generic.FormView):
         field_name = f'status_{pk}'
         if field_name in request.POST:
             obj.status = request.POST.get(field_name) == "on"
+            obj.completed_at = dt.datetime.now()
         else:
             obj.status = False
+            obj.completed_at = None
         obj.save()
         return redirect(self.success_url)
 

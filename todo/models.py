@@ -18,7 +18,7 @@ class TodoItems(models.Model):
     status = models.BooleanField(verbose_name='ステータス', default=False)
     is_important = models.BooleanField(verbose_name='重要度', default=False)
     priority = models.SmallIntegerField(verbose_name='優先度', default=0, choices=Priorities.get_priorities())
-    due_date = models.DateTimeField(verbose_name='期限日', null=True, blank=True)
+    due_date = models.DateField(verbose_name='期限日', null=True, blank=True)
     created_at = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日', auto_now=True)
     completed_at = models.DateTimeField(verbose_name='完了日', null=True, blank=True)

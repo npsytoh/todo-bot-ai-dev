@@ -6,25 +6,28 @@
     <div class="row justify-content-center">
       <div class="col-8">
 
-        <div class="row todo-create-form">
+        <div class="row todo-create-form pb-3">
           <form class="col-auto" method="post">{% csrf_token %}
             <span class="col-auto">
               {{ form.task_title }}
             </span>
           </form>
-          <button class="col-auto btn btn-primary" type="submit">追加</button>
+          <button class="col-auto btn btn-primary shadow-sm" type="submit">追加</button>
         </div>
 
-        <table class="table table-hover align-middle">
+        <table class="table table-hover align-middle shadow-sm">
           <thead>
             <tr>
               <th scope="col" style="width: 5%"></th>
-              <th scope="col"></th>
+              <th scope="col">タイトル</th>
+              <th scope="col">期限日</th>
+              <th scope="col">重要度</th>
+              <th scope="col">優先度</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {% for todo in todo_lists %}
+            {% for todo in todo_list %}
               <tr>
                 <td>
                   <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
@@ -39,14 +42,25 @@
                   </span>
                 </td>
                 <td>
-                  <div class="row">
-                    <button class="col-auto btn btn-secondary">
-                      <a href="{% url 'todo-update' todo.pk %}">編集</a>
-                    </button>
-                    <form class="col-auto" method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
-                      <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                    </form>
-                  </div>
+                  {{ todo.due_date }}
+                </td>
+                <td>
+                  <input type="checkbox" class="form-check-input" name="important_{{ todo.pk }}" {% if todo.is_important %} checked="checked" {% endif %}>
+                </td>
+                <td></td>
+                <td>
+                  <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item  border border-0">
+                      <button class="btn btn-secondary">
+                        <a href="{% url 'todo-update' todo.pk %}">編集</a>
+                      </button>
+                    </li>
+                    <li class="list-group-item border border-0">
+                      <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
+                        <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+                      </form>
+                    </li>
+                  </ul>
                 </td>
               </tr>
               {% empty %}
