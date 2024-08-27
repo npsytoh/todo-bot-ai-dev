@@ -7,9 +7,10 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 
 from .models import TodoItems
+from .models import Priorities
 from .forms import TodoCompletedModelForm
 from .forms import TodoCreateModelForm
-from .forms import TodoUpdateModelForm
+from .forms import TodoEditModelForm
 
 
 class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
@@ -21,7 +22,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form_item"] = TodoCompletedModelForm(self.request.POST or None)
+        context["form_item"] = TodoEditModelForm(self.request.POST or None)
         return context
 
     def get_queryset(self, **kwargs):
@@ -66,7 +67,7 @@ class TodoCheckToggleView(generic.FormView):
 
 class TodoUpdateView(generic.UpdateView):
     model = TodoItems
-    form_class = TodoUpdateModelForm
+    form_class = TodoEditModelForm
     template_name = 'todo/todo-update.html'
     success_url = reverse_lazy('todo-main')
 

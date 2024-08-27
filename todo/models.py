@@ -3,9 +3,10 @@ from django.db import models
 
 
 class Priorities(enum.IntEnum):
-    High = 1
+    Nothing = 0
+    Low = 1
     Middle = 2
-    Low = 3
+    High = 3
 
     @classmethod
     def get_priorities(cls):

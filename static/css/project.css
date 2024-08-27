@@ -1,0 +1,10 @@
+.functions {
+	display: flex;
+	padding: 0;
+	margin: 0;
+}
+
+.functions-item {
+	list-style: none;
+	margin-right: 5px;
+}

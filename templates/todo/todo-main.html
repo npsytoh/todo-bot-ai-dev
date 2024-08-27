@@ -47,15 +47,17 @@
                 <td>
                   <input type="checkbox" class="form-check-input" name="important_{{ todo.pk }}" {% if todo.is_important %} checked="checked" {% endif %}>
                 </td>
-                <td></td>
                 <td>
-                  <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item  border border-0">
+                  {{ todo.get_priority_display }}
+                </td>
+                <td>
+                  <ul class="functions">
+                    <li class="functions-item">
                       <button class="btn btn-secondary">
                         <a href="{% url 'todo-update' todo.pk %}">編集</a>
                       </button>
                     </li>
-                    <li class="list-group-item border border-0">
+                    <li class="functions-item">
                       <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
                         <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
                       </form>
