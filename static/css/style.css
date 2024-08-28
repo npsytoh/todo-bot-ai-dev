@@ -1,3 +1,9 @@
+nav {
+	width: 230px;
+}
+main {
+	transition: 0.3s all ease;
+}
 .functions {
 	display: flex;
 	padding: 0;

@@ -2,9 +2,18 @@
 {% block title %}ToDoBot AI - ホーム{% endblock title %}
 
 {% block main %}
-  <div class="container-fluid">
+  <div class="container-fluid mt-1">
     <div class="row justify-content-center">
       <div class="col-8">
+
+        <div class="bg-light d-flex flex-row align-items-center">
+          <div class="navbar-brand toggle-menu">
+            <button class="btn btn-light btn-sm" id="side_menu_toggle">
+              ・・・
+            </button>
+          </div>
+          <div class="fs-4 fw-bold">ToDo List</div>
+        </div>
 
         <div class="row pb-3">
           <form class="col" method="post">{% csrf_token %}
@@ -75,8 +84,8 @@
             {% endfor %}
           </tbody>
         </table>
+
       </div>
     </div>
   </div>
-
 {% endblock main %}

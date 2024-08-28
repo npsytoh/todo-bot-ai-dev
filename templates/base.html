@@ -4,7 +4,7 @@
 {% load django_bootstrap5 %}
 
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" class="h-100">
 
   <head>
     <meta charset="utf-8"/>
@@ -18,13 +18,25 @@
     {% bootstrap_javascript %}
   </head>
 
-  <body>
-    <nav>
+  <body class="h-100">
+    <header class="w-100 d-flex justify-content-between align-items-center bg-light px-3">
       <h1>ToDoBot AI</h1>
-    </nav>
-    <main>
-      {% block main %}{% endblock main %}
-    </main>
+    </header>
+    <div class="d-flex flex-row w-100" style="height: calc(100% - 50px)">
+      <nav class="bg-light">
+        <ul class="nav flex-column m-0">
+          <li class="nav-item">
+            <a href="#" class="nav-link py-3 text-reset">Menu1</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link py-3 text-reset">Menu2</a>
+          </li>
+        </ul>
+      </nav>
+      <main class="w-100 bg-light">
+        {% block main %}{% endblock main %}
+      </main>
+    </div>
     <footer></footer>
     {% block modal %}{% endblock modal %}
     {% block js %}{% endblock js %}

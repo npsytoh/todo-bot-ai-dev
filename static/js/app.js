@@ -1,3 +1,18 @@
+window.onload = () => {
+	const main = document.getElementsByTagName('main')[0];
+	const sideMenuToggle = document.getElementById('side_menu_toggle');
+	let sideMenuStatus = true;
+	sideMenuToggle.addEventListener('click', () => {
+		if (sideMenuStatus) {
+			main.style.cssText = 'margin-left: -230px';
+			sideMenuStatus = false;
+		} else {
+			main.style.cssText = 'margin-left: 0px';
+			sideMenuStatus = true;
+		}
+	});
+};
+
 const todoCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 
 const changeClass = (element) => {
