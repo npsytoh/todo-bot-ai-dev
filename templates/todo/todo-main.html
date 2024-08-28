@@ -6,13 +6,19 @@
     <div class="row justify-content-center">
       <div class="col-8">
 
-        <div class="row todo-create-form pb-3">
-          <form class="col-auto" method="post">{% csrf_token %}
-            <span class="col-auto">
-              {{ form.task_title }}
-            </span>
+        <div class="row pb-3">
+          <form class="col" method="post">{% csrf_token %}
+            <div class="row">
+              <div class="col-10 pe-0">
+                <span>
+                  {{ form.task_title }}
+                </span>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary w-100 shadow-sm" type="submit">追加</button>
+              </div>
+            </div>
           </form>
-          <button class="col-auto btn btn-primary shadow-sm" type="submit">追加</button>
         </div>
 
         <table class="table table-hover align-middle shadow-sm">
