@@ -1,8 +1,17 @@
+header {
+	height: 50px;
+}
 nav {
 	width: 230px;
 }
 main {
 	transition: 0.3s all ease;
+}
+.main-content {
+	height: calc(100% - 50px);
+}
+.table-container {
+	flex: 1;
 }
 .functions {
 	display: flex;

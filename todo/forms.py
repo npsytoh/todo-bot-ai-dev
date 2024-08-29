@@ -18,7 +18,7 @@ class TodoCreateModelForm(forms.ModelForm):
         fields = ['task_title']
         widgets = {
             'task_title': forms.TextInput(attrs={
-                'class': 'form-control shadow-sm',
+                'class': 'form-control shadow-sm border border-0',
                 'placeholder': 'タスクを入力...',
             }),
         }

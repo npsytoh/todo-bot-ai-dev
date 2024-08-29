@@ -2,21 +2,21 @@
 {% block title %}ToDoBot AI - ホーム{% endblock title %}
 
 {% block main %}
-  <div class="container-fluid mt-1">
-    <div class="row justify-content-center">
-      <div class="col-8">
+  <div class="container-fluid h-100 px-5 py-1">
+    <div class="row h-100 justify-content-center">
+      <div class="col h-100 d-flex flex-column">
 
-        <div class="bg-light d-flex flex-row align-items-center">
-          <div class="navbar-brand toggle-menu">
+        <div class="d-flex bg-light align-items-center">
+          <div class="toggle-menu">
             <button class="btn btn-light btn-sm" id="side_menu_toggle">
               ・・・
             </button>
           </div>
-          <div class="fs-4 fw-bold">ToDo List</div>
+          <div class="fs-4 fw-bold flex-grow-1">ToDo List</div>
         </div>
 
         <div class="row pb-3">
-          <form class="col" method="post">{% csrf_token %}
+          <form class="col-12" method="post">{% csrf_token %}
             <div class="row">
               <div class="col-10 pe-0">
                 <span>
@@ -30,60 +30,62 @@
           </form>
         </div>
 
-        <table class="table table-hover align-middle shadow-sm">
-          <thead>
-            <tr>
-              <th scope="col" style="width: 5%"></th>
-              <th scope="col">タイトル</th>
-              <th scope="col">期限日</th>
-              <th scope="col">重要度</th>
-              <th scope="col">優先度</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for todo in todo_list %}
+        <div class="table-container flex-grow-1 overflow-y-auto rounded-2 shadow-sm mb-3">
+          <table class="table table-hover align-middle m-0">
+            <thead>
               <tr>
-                <td>
-                  <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
-                    <span id="todo-status-{{ todo.pk }}">
-                      <input type="checkbox" class="form-check-input" name="status_{{ todo.pk }}" {% if todo.status %} checked="checked" {% endif %}>
-                    </span>
-                  </form>
-                </td>
-                <td>
-                  <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.pk }}">
-                    {{ todo.task_title }}
-                  </span>
-                </td>
-                <td>
-                  {{ todo.due_date }}
-                </td>
-                <td>
-                  <input type="checkbox" class="form-check-input" name="important_{{ todo.pk }}" {% if todo.is_important %} checked="checked" {% endif %}>
-                </td>
-                <td>
-                  {{ todo.get_priority_display }}
-                </td>
-                <td>
-                  <ul class="functions">
-                    <li class="functions-item">
-                      <button class="btn btn-secondary">
-                        <a href="{% url 'todo-update' todo.pk %}">編集</a>
-                      </button>
-                    </li>
-                    <li class="functions-item">
-                      <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
-                        <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                      </form>
-                    </li>
-                  </ul>
-                </td>
+                <th scope="col" style="width: 5%"></th>
+                <th scope="col">タイトル</th>
+                <th scope="col">期限日</th>
+                <th scope="col">重要度</th>
+                <th scope="col">優先度</th>
+                <th scope="col"></th>
               </tr>
-              {% empty %}
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for todo in todo_list %}
+                <tr>
+                  <td>
+                    <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
+                      <span id="todo-status-{{ todo.pk }}">
+                        <input type="checkbox" class="form-check-input" name="status_{{ todo.pk }}" {% if todo.status %} checked="checked" {% endif %}>
+                      </span>
+                    </form>
+                  </td>
+                  <td>
+                    <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.pk }}">
+                      {{ todo.task_title }}
+                    </span>
+                  </td>
+                  <td>
+                    {{ todo.due_date }}
+                  </td>
+                  <td>
+                    <input type="checkbox" class="form-check-input" name="important_{{ todo.pk }}" {% if todo.is_important %} checked="checked" {% endif %}>
+                  </td>
+                  <td>
+                    {{ todo.get_priority_display }}
+                  </td>
+                  <td>
+                    <ul class="functions">
+                      <li class="functions-item">
+                        <button class="btn btn-secondary">
+                          <a href="{% url 'todo-update' todo.pk %}" class="text-decoration-none text-reset">編集</a>
+                        </button>
+                      </li>
+                      <li class="functions-item">
+                        <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
+                          <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+                        </form>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                {% empty %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
 
       </div>
     </div>
