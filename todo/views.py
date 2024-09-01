@@ -1,6 +1,5 @@
 import datetime as dt
 
-from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
@@ -65,13 +64,17 @@ class TodoCheckToggleView(generic.FormView):
         obj.save()
         return redirect(self.success_url)
 
-class TodoUpdateView(generic.UpdateView):
+class TodoEditView(generic.UpdateView):
     model = TodoItems
     form_class = TodoEditModelForm
-    template_name = 'todo/todo-update.html'
+    template_name = 'todo/todo-edit.html'
+    slug_field = 'task_id'
+    slug_url_kwarg = 'task_id'
     success_url = reverse_lazy('todo-main')
 
 class TodoDeleteView(generic.DeleteView):
     model = TodoItems
+    slug_field = 'task_id'
+    slug_url_kwarg = 'task_id'
     success_url = reverse_lazy('todo-main')
     http_method_names = ['post']

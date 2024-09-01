@@ -71,11 +71,11 @@
                   <ul class="functions">
                     <li class="functions-item">
                       <button class="btn btn-secondary">
-                        <a href="{% url 'todo-update' todo.pk %}" class="text-decoration-none text-reset">編集</a>
+                        <a href="{% url 'todo-edit' todo.task_id %}" class="text-decoration-none text-reset">編集</a>
                       </button>
                     </li>
                     <li class="functions-item">
-                      <form method="post" action="{% url 'todo-delete' todo.pk %}">{% csrf_token %}
+                      <form method="post" action="{% url 'todo-delete' todo.task_id %}">{% csrf_token %}
                         <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
                       </form>
                     </li>
