@@ -4,7 +4,7 @@
 {% load django_bootstrap5 %}
 
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" class="h-100">
+<html lang="{{ LANGUAGE_CODE }}">
 
   <head>
     <meta charset="utf-8"/>
@@ -18,27 +18,47 @@
     {% bootstrap_javascript %}
   </head>
 
-  <body class="h-100 d-flex flex-column">
-    <header class="w-100 d-flex justify-content-between align-items-center bg-light px-3">
-      <h1>ToDoBot AI</h1>
-    </header>
-    <div class="main-content d-flex flex-row w-100">
-      <nav class="bg-light">
-        <ul class="nav flex-column m-0">
-          <li class="nav-item">
-            <a href="#" class="nav-link py-3 text-reset">Menu1</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link py-3 text-reset">Menu2</a>
-          </li>
-        </ul>
-      </nav>
-      <main class="w-100 bg-light">
-        {% block main %}{% endblock main %}
-      </main>
+  <body class="vh-100">
+    <div class="d-flex flex-column h-100">
+      <div class="header-wrapper">
+        <header class="header-content d-flex align-items-center justify-content-between bg-primary">
+          <div class="header-left">
+            <a href="{% url 'todo-main' %}" class="nav-link">
+              <h2>ToDoBot AI</h2>
+            </a>
+          </div>
+          <div class="header-center"></div>
+          <div class="header-right"></div>
+        </header>
+      </div>
+      <div class="main-wapper container-fluid p-0 flex-grow-1">
+        <div class="row h-100 m-0">
+          <div class="sidebar-content col-2 p-0">
+            <nav class="bg-light h-100">
+              <div class="container-fluid p-0">
+                <ul class="nav d-flex flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link text-reset" href="#">
+                      <span>INBOX</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="main-content col p-0">
+            <main class="d-flex flex-column h-100">
+              {% block main %}{% endblock main %}
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="footer-wrapper">
+        <footer class="footer-content d-flex align-items-center justify-content-center bg-primary">
+          <span>footer</span>
+        </footer>
+      </div>
     </div>
-
-    <footer></footer>
     {% block modal %}{% endblock modal %}
     {% block js %}{% endblock js %}
     <script src="{% static 'js/app.js' %}"></script>

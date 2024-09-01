@@ -1,15 +1,8 @@
 window.onload = () => {
-	const main = document.getElementsByTagName('main')[0];
-	const sideMenuToggle = document.getElementById('side_menu_toggle');
-	let sideMenuStatus = true;
-	sideMenuToggle.addEventListener('click', () => {
-		if (sideMenuStatus) {
-			main.style.cssText = 'margin-left: -230px';
-			sideMenuStatus = false;
-		} else {
-			main.style.cssText = 'margin-left: 0px';
-			sideMenuStatus = true;
-		}
+	const sideBarContent = document.getElementsByClassName('sidebar-content')[0];
+	const sideBarToggle = document.getElementById('sidebar_toggle');
+	sideBarToggle.addEventListener('click', () => {
+		sideBarContent.classList.toggle('d-none');
 	});
 };
 
