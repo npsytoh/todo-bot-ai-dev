@@ -3,14 +3,16 @@
 
 {% block main %}
   <section class="pb-3 mx-5 mt-3">
-    <div class="d-flex align-items-center">
-      <div class="toggle-menu">
-        <button class="btn btn-sm" id="sidebar_toggle">・・・</button>
-      </div>
-      <div class="fs-4 fw-bold flex-grow-1">INBOX</div>
+    <div>
+      <header class="d-flex align-items-center">
+        <div class="toggle-menu">
+          <button class="btn btn-sm" id="sidebar_toggle">・・・</button>
+        </div>
+        <div class="fs-4 fw-bold flex-grow-1">INBOX</div>
+      </header>
     </div>
     <div>
-      <form class="" method="post">
+      <form method="post">
         {% csrf_token %}
         <div class="row">
           <div class="col-10 pe-0">
@@ -33,11 +35,11 @@
         <table class="table table-header m-0">
           <thead>
             <th scope="col" style="width: 5%"></th>
-            <th scope="col">タイトル</th>
-            <th scope="col">期限日</th>
-            <th scope="col">重要度</th>
-            <th scope="col">優先度</th>
-            <th scope="col "></th>
+            <th scope="col" style="width: 50%">タイトル</th>
+            <th scope="col" style="width: 10%">期限日</th>
+            <th scope="col" style="width: 10%">重要度</th>
+            <th scope="col" style="width: 10%">優先度</th>
+            <th scope="col" style="width: 15%"></th>
           </thead>
         </table>
       </div>
@@ -47,36 +49,38 @@
             {% for todo in todo_list %}
               <tr>
                 <td style="width: 5%">
-                  <form method="post" action="{% url 'todo-check-toggle' todo.pk %}">{% csrf_token %}
-                    <span id="todo-status-{{ todo.pk }}">
-                      <input type="checkbox" class="form-check-input" name="status_{{ todo.pk }}" {% if todo.status %} checked="checked" {% endif %}>
+                  <form method="post" action="{% url 'todo-status-change' task_id=todo.task_id %}">{% csrf_token %}
+                    <span id="todo-status-{{ todo.task_id }}">
+                      <input type="checkbox" class="form-check-input" name="status_{{ todo.task_id }}" {% if todo.status %} checked="checked" {% endif %}>
                     </span>
                   </form>
                 </td>
-                <td>
-                  <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.pk }}">
+                <td style="width: 50%">
+                  <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.task_id }}">
                     {{ todo.task_title }}
                   </span>
                 </td>
-                <td>
+                <td style="width: 10%">
                   {{ todo.due_date }}
                 </td>
-                <td>
-                  <input type="checkbox" class="form-check-input" name="important_{{ todo.pk }}" {% if todo.is_important %} checked="checked" {% endif %}>
+                <td style="width: 10%">
+                  <input type="checkbox" class="form-check-input" name="important_{{ todo.task_id }}" {% if todo.is_important %} checked="checked" {% endif %}>
                 </td>
-                <td>
+                <td style="width: 10%">
                   {{ todo.get_priority_display }}
                 </td>
-                <td>
+                <td style="width: 15%">
                   <ul class="functions">
                     <li class="functions-item">
-                      <button class="btn btn-secondary">
-                        <a href="{% url 'todo-edit' todo.task_id %}" class="text-decoration-none text-reset">編集</a>
-                      </button>
+                      <a href="{% url 'todo-edit' task_id=todo.task_id %}">
+                        <ion-icon name="create-outline" class="edit-icon" aria-label="タスクの編集"></ion-icon>
+                      </a>
                     </li>
                     <li class="functions-item">
-                      <form method="post" action="{% url 'todo-delete' todo.task_id %}">{% csrf_token %}
-                        <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+                      <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
+                        <button class="btn p-0" type="delete" onclick='return confirm("本当に削除しますか？");'>
+                          <ion-icon name="trash-outline" class="delete-icon" aria-label="タスクの削除"></ion-icon>
+                        </button>
                       </form>
                     </li>
                   </ul>

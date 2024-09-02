@@ -45,16 +45,16 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
         else:
             return self.form_invalid(form)
 
-class TodoCheckToggleView(generic.FormView):
+class TodoStatusChangeView(generic.FormView):
     model = TodoItems
     form_class = TodoCompletedModelForm
     success_url = reverse_lazy('todo-main')
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        obj = get_object_or_404(TodoItems, pk=pk)
-        field_name = f'status_{pk}'
+        task_id = self.kwargs.get('task_id')
+        obj = get_object_or_404(TodoItems, task_id=task_id)
+        field_name = f'status_{task_id}'
         if field_name in request.POST:
             obj.status = request.POST.get(field_name) == "on"
             obj.completed_at = dt.datetime.now()

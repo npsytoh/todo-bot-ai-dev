@@ -38,7 +38,8 @@
               <div class="container-fluid p-0">
                 <ul class="nav d-flex flex-column">
                   <li class="nav-item">
-                    <a class="nav-link text-reset" href="#">
+                    <a class="nav-link text-reset d-flex align-items-center" href="#">
+                      <ion-icon name="checkbox-outline"></ion-icon>
                       <span>INBOX</span>
                     </a>
                   </li>
@@ -47,7 +48,7 @@
             </nav>
           </div>
           <div class="main-content col p-0">
-            <main class="d-flex flex-column h-100">
+            <main class="d-flex flex-column h-100 mx-5">
               {% block main %}{% endblock main %}
             </main>
           </div>
@@ -62,6 +63,8 @@
     {% block modal %}{% endblock modal %}
     {% block js %}{% endblock js %}
     <script src="{% static 'js/app.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
 
 </html>

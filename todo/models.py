@@ -1,19 +1,8 @@
 from enum import IntEnum
 
 from django.db import models
+from django_ulid.models import ulid
 
-from utils.random_string import get_random_string
-
-
-SLUG_LENGTH = 20
-
-def default_slug():
-    while True:
-        new_slug = get_random_string(SLUG_LENGTH)
-        slug_count = TodoItems.objects.filter(task_id=new_slug).count()
-        if slug_count == 0:
-            break
-    return new_slug
 
 class Priorities(IntEnum):
     Nothing = 0
@@ -26,7 +15,7 @@ class Priorities(IntEnum):
         return tuple((x.value, x.name) for x in cls)
 
 class TodoItems(models.Model):
-    task_id = models.SlugField(max_length=SLUG_LENGTH, unique=True, default=default_slug)
+    task_id = models.SlugField(max_length=26, unique=True, default=ulid.new, editable=False)
     task_title = models.CharField(verbose_name='タイトル', max_length=255)
     task_description = models.TextField(verbose_name='詳細', default='', null=True, blank=True)
     status = models.BooleanField(verbose_name='ステータス', default=False)
