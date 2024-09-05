@@ -1,12 +1,24 @@
 {
-	"name": "django-doncainer",
-	"image": "python:3.11.9-bookworm",
+	"name": "django-container",
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
 	"customizations": {
 		"vscode": {
-			"extensions": ["batisteo.vscode-django", "Glavin001.unibeautify-vscode"],
+			"extensions": [
+				"ms-python.python",
+				"ms-python.autopep8",
+				"ms-python.isort",
+				"batisteo.vscode-django",
+				"Glavin001.unibeautify-vscode"
+			],
 			"settings": {
 				"emmet.includeLanguages": {
 					"django-html": "html"
+				},
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.autopep8"
 				},
 				"[django-html]": {
 					"editor.defaultFormatter": "Glavin001.unibeautify-vscode"
