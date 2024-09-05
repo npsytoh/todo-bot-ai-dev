@@ -1,0 +1,17 @@
+{
+	"name": "django-doncainer",
+	"image": "python:3.11.9-bookworm",
+	"customizations": {
+		"vscode": {
+			"extensions": ["batisteo.vscode-django", "Glavin001.unibeautify-vscode"],
+			"settings": {
+				"emmet.includeLanguages": {
+					"django-html": "html"
+				},
+				"[django-html]": {
+					"editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+				}
+			}
+		}
+	}
+}
