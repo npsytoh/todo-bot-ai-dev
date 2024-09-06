@@ -1,9 +1,18 @@
 {
 	"name": "django-container",
 	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"context": ".."
 	},
+	"runArgs": ["--name=django-container", "--rm"],
+	"workspaceFolder": "/code",
+	"mounts": [
+		{
+			"type": "volume",
+			"source": "devcontainer_venv",
+			"target": "${containerWorkspaceFolder}/.venv"
+		}
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
