@@ -25,14 +25,9 @@
 				"Glavin001.unibeautify-vscode"
 			],
 			"settings": {
-				"emmet.includeLanguages": {
-					"django-html": "html"
-				},
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"[python]": {
 					"editor.defaultFormatter": "ms-python.autopep8"
-				},
-				"[django-html]": {
-					"editor.defaultFormatter": "Glavin001.unibeautify-vscode"
 				}
 			}
 		}
