@@ -1,5 +1,5 @@
 {
-	"name": "django-container",
+	"name": "Django Container",
 	"build": {
 		"dockerfile": "../Dockerfile",
 		"context": ".."
@@ -14,6 +14,7 @@
 			"target": "${containerWorkspaceFolder}/.venv"
 		}
 	],
+	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 	"customizations": {
 		"vscode": {
 			"extensions": [
