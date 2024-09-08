@@ -14,6 +14,7 @@
     </title>
     <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
   </head>
@@ -39,8 +40,20 @@
                 <ul class="nav d-flex flex-column">
                   <li class="nav-item">
                     <a class="nav-link text-reset d-flex align-items-center" href="#">
-                      <ion-icon name="checkbox-outline"></ion-icon>
-                      <span>INBOX</span>
+                      <i class='bx bx-check icon-primary'></i>
+                      <span>すべてのタスク</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-reset d-flex align-items-center" href="#">
+                      <i class='bx bxs-calendar-alt icon-primary'></i>
+                      <span>期限付き</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-reset d-flex align-items-center" href="#">
+                      <i class='bx bxs-star icon-primary'></i>
+                      <span>重要</span>
                     </a>
                   </li>
                 </ul>

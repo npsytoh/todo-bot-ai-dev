@@ -6,7 +6,9 @@
     <div>
       <header class="d-flex align-items-center">
         <div class="toggle-menu">
-          <button class="btn btn-sm" id="sidebar_toggle">・・・</button>
+          <button class="btn btn-sm d-flex justify-content-center" id="sidebar_toggle">
+            <i class='bx bx-menu icon-primary'></i>
+          </button>
         </div>
         <div class="fs-4 fw-bold flex-grow-1">INBOX</div>
       </header>
@@ -31,7 +33,7 @@
   </section>
   <section class="flex-grow-1 mx-5 mb-3">
     <div class="table-container d-flex flex-column h-100 shadow-sm">
-      <div class="thead-wrapper m-0">
+      {% comment %} <div class="thead-wrapper m-0">
         <table class="table table-header m-0">
           <thead>
             <th scope="col" style="width: 5%"></th>
@@ -42,7 +44,7 @@
             <th scope="col" style="width: 15%"></th>
           </thead>
         </table>
-      </div>
+      </div> {% endcomment %}
       <div class="tbody-wrapper m-0 flex-grow-1 overflow-y-auto">
         <table class="table table-hover align-middle m-0">
           <tbody>
@@ -51,35 +53,48 @@
                 <td style="width: 5%">
                   <form method="post" action="{% url 'todo-status-change' task_id=todo.task_id %}">{% csrf_token %}
                     <span id="todo-status-{{ todo.task_id }}">
-                      <input type="checkbox" class="form-check-input" name="status_{{ todo.task_id }}" {% if todo.status %} checked="checked" {% endif %}>
+                      {% comment %} <input type="checkbox" class="form-check-input" name="status_{{ todo.task_id }}" {% if todo.status %} checked="checked" {% endif %}> {% endcomment %}
+                      <button class="btn p-0 d-flex justify-content-center" type="submit">
+                        <i class='bx bx-circle icon-primary'></i>
+                      </button>
                     </span>
                   </form>
                 </td>
-                <td style="width: 50%">
+                <td>
                   <span class="{% if todo.status %}text-decoration-line-through{% endif %}" id="todo-title-{{ todo.task_id }}">
                     {{ todo.task_title }}
                   </span>
                 </td>
-                <td style="width: 10%">
+                {% comment %} <td style="width: 10%">
                   {{ todo.due_date }}
-                </td>
-                <td style="width: 10%">
+                </td> {% endcomment %}
+                {% comment %} <td style="width: 10%">
                   <input type="checkbox" class="form-check-input" name="important_{{ todo.task_id }}" {% if todo.is_important %} checked="checked" {% endif %}>
-                </td>
-                <td style="width: 10%">
+                  <button class="btn p-0 d-flex justify-content-center" type="button">
+                    <i class='bx bx-star icon-primary' aria-label="重要タスク"></i>
+                  </button>
+                </td> {% endcomment %}
+                {% comment %} <td style="width: 10%">
                   {{ todo.get_priority_display }}
-                </td>
-                <td style="width: 15%">
+                </td> {% endcomment %}
+                <td style="width: 20%">
                   <ul class="functions">
                     <li class="functions-item">
-                      <a href="{% url 'todo-edit' task_id=todo.task_id %}">
-                        <ion-icon name="create-outline" class="edit-icon" aria-label="タスクの編集"></ion-icon>
-                      </a>
+                      <button class="btn p-0 d-flex justify-content-center" type="button">
+                        <i class='bx bx-star icon-primary icon-important' aria-label="重要タスク"></i>
+                      </button>
+                    </li>
+                    <li class="functions-item">
+                      <button class="btn p-0 d-flex justify-content-center" type="link">
+                        <a href="{% url 'todo-edit' task_id=todo.task_id %}">
+                          <i class='bx bxs-edit icon-primary icon-secondary' aria-label="タスクの編集"></i>
+                        </a>
+                      </button>
                     </li>
                     <li class="functions-item">
                       <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
-                        <button class="btn p-0" type="delete" onclick='return confirm("本当に削除しますか？");'>
-                          <ion-icon name="trash-outline" class="delete-icon" aria-label="タスクの削除"></ion-icon>
+                        <button class="btn p-0 d-flex justify-content-center" type="delete" onclick='return confirm("本当に削除しますか？");'>
+                          <i class='bx bxs-trash-alt icon-primary icon-danger' aria-label="タスクの削除"></i>
                         </button>
                       </form>
                     </li>

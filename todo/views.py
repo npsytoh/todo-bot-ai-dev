@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 
 from .models import TodoItems
-from .models import Priorities
 from .forms import TodoCompletedModelForm
 from .forms import TodoCreateModelForm
 from .forms import TodoEditModelForm
@@ -45,6 +44,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
         else:
             return self.form_invalid(form)
 
+
 class TodoStatusChangeView(generic.FormView):
     model = TodoItems
     form_class = TodoCompletedModelForm
@@ -64,6 +64,7 @@ class TodoStatusChangeView(generic.FormView):
         obj.save()
         return redirect(self.success_url)
 
+
 class TodoEditView(generic.UpdateView):
     model = TodoItems
     form_class = TodoEditModelForm
@@ -71,6 +72,7 @@ class TodoEditView(generic.UpdateView):
     slug_field = 'task_id'
     slug_url_kwarg = 'task_id'
     success_url = reverse_lazy('todo-main')
+
 
 class TodoDeleteView(generic.DeleteView):
     model = TodoItems

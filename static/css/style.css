@@ -35,13 +35,17 @@
 	margin-right: 5px;
 }
 
-ion-icon {
-	font-size: 20px;
-}
-
-.edit-icon {
+.icon-primary {
+	font-size: 24px;
 	color: #888;
 }
-.delete-icon {
+
+.icon-important:hover {
+	color: yellow;
+}
+.icon-secondary:hover {
+	color: blue;
+}
+.icon-danger:hover {
 	color: red;
 }
