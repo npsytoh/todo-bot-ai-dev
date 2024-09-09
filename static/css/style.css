@@ -1,4 +1,4 @@
-.main-content main {
+.sidebar-content {
 	transition: 0.3s;
 }
 
@@ -10,16 +10,13 @@
 	width: 5px;
 	height: 10px;
 }
-
 .tbody-wrapper::-webkit-scrollbar-track {
 	background: #f1f1f1;
 }
-
 .tbody-wrapper::-webkit-scrollbar-thumb {
 	background: #888;
 	border-radius: 5px;
 }
-
 .tbody-wrapper::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
@@ -29,23 +26,47 @@
 	padding: 0;
 	margin: 0;
 }
-
 .functions-item {
 	list-style: none;
 	margin-right: 5px;
 }
 
-.icon-primary {
-	font-size: 24px;
-	color: #888;
+/* Icon style */
+.icon-default,
+.icon-hover,
+.icon-disable,
+.icon-enable {
+	font-size: 22px;
+	color: #808080;
+	opacity: 0.5;
+}
+.icon-hover {
+	opacity: 0;
+}
+.icon-disable {
+	visibility: hidden;
+}
+.icon-enable {
+	opacity: 1;
 }
 
-.icon-important:hover {
-	color: yellow;
+/* Icon position */
+.icon-default {
+	position: relative;
 }
-.icon-secondary:hover {
-	color: blue;
+.icon-hover,
+.icon-disable,
+.icon-enable {
+	position: absolute;
+}
+
+/* Icon hover */
+.icon-default:hover,
+.icon-hover:hover {
+	opacity: 1;
+	transition: 0.5s;
 }
 .icon-danger:hover {
 	color: red;
+	transition: 0.5s;
 }

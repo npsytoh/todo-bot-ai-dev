@@ -40,19 +40,19 @@
                 <ul class="nav d-flex flex-column">
                   <li class="nav-item">
                     <a class="nav-link text-reset d-flex align-items-center" href="#">
-                      <i class='bx bx-check icon-primary'></i>
+                      <i class='bx bx-check icon-default pe-3'></i>
                       <span>すべてのタスク</span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-reset d-flex align-items-center" href="#">
-                      <i class='bx bxs-calendar-alt icon-primary'></i>
+                      <i class='bx bxs-calendar-alt icon-default pe-3'></i>
                       <span>期限付き</span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-reset d-flex align-items-center" href="#">
-                      <i class='bx bxs-star icon-primary'></i>
+                      <i class='bx bxs-star icon-default pe-3'></i>
                       <span>重要</span>
                     </a>
                   </li>
@@ -74,10 +74,11 @@
       </div>
     </div>
     {% block modal %}{% endblock modal %}
-    {% block js %}{% endblock js %}
+
     <script src="{% static 'js/app.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    {% block js %}{% endblock js %}
   </body>
 
 </html>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}ToDoBot AI - ホーム{% endblock title %}
 
 {% block main %}
@@ -7,7 +8,7 @@
       <header class="d-flex align-items-center">
         <div class="toggle-menu">
           <button class="btn btn-sm d-flex justify-content-center" id="sidebar_toggle">
-            <i class='bx bx-menu icon-primary'></i>
+            <i class='bx bx-menu icon-default'></i>
           </button>
         </div>
         <div class="fs-4 fw-bold flex-grow-1">INBOX</div>
@@ -53,9 +54,10 @@
                 <td style="width: 5%">
                   <form method="post" action="{% url 'todo-status-change' task_id=todo.task_id %}">{% csrf_token %}
                     <span id="todo-status-{{ todo.task_id }}">
-                      {% comment %} <input type="checkbox" class="form-check-input" name="status_{{ todo.task_id }}" {% if todo.status %} checked="checked" {% endif %}> {% endcomment %}
-                      <button class="btn p-0 d-flex justify-content-center" type="submit">
-                        <i class='bx bx-circle icon-primary'></i>
+                      <button class="button-toggle btn p-0 d-flex justify-content-center button-status" type="button">
+                        <i class='bx bx-circle icon-default'></i>
+                        <i class='bx bx-check-circle icon-hover'></i>
+                        <i class='bx bxs-check-circle icon-disable'></i>
                       </button>
                     </span>
                   </form>
@@ -65,40 +67,53 @@
                     {{ todo.task_title }}
                   </span>
                 </td>
-                {% comment %} <td style="width: 10%">
-                  {{ todo.due_date }}
-                </td> {% endcomment %}
-                {% comment %} <td style="width: 10%">
-                  <input type="checkbox" class="form-check-input" name="important_{{ todo.task_id }}" {% if todo.is_important %} checked="checked" {% endif %}>
-                  <button class="btn p-0 d-flex justify-content-center" type="button">
-                    <i class='bx bx-star icon-primary' aria-label="重要タスク"></i>
-                  </button>
-                </td> {% endcomment %}
-                {% comment %} <td style="width: 10%">
-                  {{ todo.get_priority_display }}
-                </td> {% endcomment %}
-                <td style="width: 20%">
+                <td style="width: 10%">
                   <ul class="functions">
                     <li class="functions-item">
-                      <button class="btn p-0 d-flex justify-content-center" type="button">
-                        <i class='bx bx-star icon-primary icon-important' aria-label="重要タスク"></i>
+                      <button class="button-toggle btn p-0 d-flex justify-content-center" type="button">
+                        <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
+                        <i class='bx bxs-star icon-hover'></i>
+                        <i class='bx bxs-star icon-disable'></i>
                       </button>
                     </li>
                     <li class="functions-item">
                       <button class="btn p-0 d-flex justify-content-center" type="link">
                         <a href="{% url 'todo-edit' task_id=todo.task_id %}">
-                          <i class='bx bxs-edit icon-primary icon-secondary' aria-label="タスクの編集"></i>
+                          <i class='bx bxs-edit icon-default' aria-label="タスクの編集"></i>
                         </a>
                       </button>
                     </li>
                     <li class="functions-item">
                       <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
                         <button class="btn p-0 d-flex justify-content-center" type="delete" onclick='return confirm("本当に削除しますか？");'>
-                          <i class='bx bxs-trash-alt icon-primary icon-danger' aria-label="タスクの削除"></i>
+                          <i class='bx bxs-trash-alt icon-default icon-danger' aria-label="タスクの削除"></i>
                         </button>
                       </form>
                     </li>
                   </ul>
+                  {% comment %} <div class="d-flex">
+                    <div>
+                      <button class="button-toggle btn p-0" type="button">
+                        <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
+                        <i class='bx bxs-star icon-hover'></i>
+                        <i class='bx bxs-star icon-disable'></i>
+                      </button>
+                    </div>
+                    <div>
+                      <button class="btn p-0" type="link">
+                        <a href="{% url 'todo-edit' task_id=todo.task_id %}">
+                          <i class='bx bxs-edit icon-default' aria-label="タスクの編集"></i>
+                        </a>
+                      </button>
+                    </div>
+                    <div>
+                      <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
+                        <button class="btn p-0" type="delete" onclick='return confirm("本当に削除しますか？");'>
+                          <i class='bx bxs-trash-alt icon-default icon-danger' aria-label="タスクの削除"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </div> {% endcomment %}
                 </td>
               </tr>
               {% empty %}
@@ -109,3 +124,7 @@
     </div>
   </section>
 {% endblock main %}
+
+{% block js %}
+  <script src="{% static 'js/item.js' %}"></script>
+{% endblock js %}
