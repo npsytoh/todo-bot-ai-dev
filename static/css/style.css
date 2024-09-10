@@ -1,11 +1,17 @@
-.sidebar-content {
-	transition: 0.3s;
+/* Reset */
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+	appearance: none;
 }
 
+/* Table style */
 .tbody-wrapper {
 	height: 100px;
 }
-
 .tbody-wrapper::-webkit-scrollbar {
 	width: 5px;
 	height: 10px;
@@ -21,14 +27,25 @@
 	background: #555;
 }
 
+/* Functions style */
 .functions {
 	display: flex;
 	padding: 0;
 	margin: 0;
 }
-.functions-item {
+.function-item {
+	display: flex;
+	align-items: center;
 	list-style: none;
-	margin-right: 5px;
+	margin: 0 5px;
+}
+.function-item button {
+	display: flex;
+	padding: 0;
+}
+.function-item button a {
+	display: flex;
+	text-decoration: none;
 }
 
 /* Icon style */

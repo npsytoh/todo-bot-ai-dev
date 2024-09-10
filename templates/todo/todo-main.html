@@ -69,51 +69,27 @@
                 </td>
                 <td style="width: 10%">
                   <ul class="functions">
-                    <li class="functions-item">
-                      <button class="button-toggle btn p-0 d-flex justify-content-center" type="button">
+                    <li class="function-item">
+                      <button class="button-toggle" type="button">
                         <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
-                        <i class='bx bxs-star icon-hover'></i>
                         <i class='bx bxs-star icon-disable'></i>
                       </button>
                     </li>
-                    <li class="functions-item">
-                      <button class="btn p-0 d-flex justify-content-center" type="link">
+                    <li class="function-item">
+                      <button type="link">
                         <a href="{% url 'todo-edit' task_id=todo.task_id %}">
                           <i class='bx bxs-edit icon-default' aria-label="タスクの編集"></i>
                         </a>
                       </button>
                     </li>
-                    <li class="functions-item">
+                    <li class="function-item">
                       <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
-                        <button class="btn p-0 d-flex justify-content-center" type="delete" onclick='return confirm("本当に削除しますか？");'>
+                        <button type="delete" onclick='return confirm("本当に削除しますか？");'>
                           <i class='bx bxs-trash-alt icon-default icon-danger' aria-label="タスクの削除"></i>
                         </button>
                       </form>
                     </li>
                   </ul>
-                  {% comment %} <div class="d-flex">
-                    <div>
-                      <button class="button-toggle btn p-0" type="button">
-                        <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
-                        <i class='bx bxs-star icon-hover'></i>
-                        <i class='bx bxs-star icon-disable'></i>
-                      </button>
-                    </div>
-                    <div>
-                      <button class="btn p-0" type="link">
-                        <a href="{% url 'todo-edit' task_id=todo.task_id %}">
-                          <i class='bx bxs-edit icon-default' aria-label="タスクの編集"></i>
-                        </a>
-                      </button>
-                    </div>
-                    <div>
-                      <form method="post" action="{% url 'todo-delete' task_id=todo.task_id %}">{% csrf_token %}
-                        <button class="btn p-0" type="delete" onclick='return confirm("本当に削除しますか？");'>
-                          <i class='bx bxs-trash-alt icon-default icon-danger' aria-label="タスクの削除"></i>
-                        </button>
-                      </form>
-                    </div>
-                  </div> {% endcomment %}
                 </td>
               </tr>
               {% empty %}
