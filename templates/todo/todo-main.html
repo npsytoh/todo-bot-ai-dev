@@ -7,7 +7,7 @@
     <div>
       <header class="d-flex align-items-center">
         <div class="toggle-menu">
-          <button class="btn btn-sm d-flex justify-content-center" id="sidebar_toggle">
+          <button class="d-flex justify-content-center" id="sidebar_toggle">
             <i class='bx bx-menu icon-default'></i>
           </button>
         </div>
@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-10 pe-0">
             <span>
-              {{ form.task_title }}
+              <input type="text" name="{{ form.task_title.html_name }}" class="form-control shadow-sm border border-0" placeholder="タスクを入力..." maxlength="255" autofocus />
             </span>
           </div>
           <div class="col-2">
@@ -54,7 +54,8 @@
                 <td style="width: 5%">
                   <form method="post" action="{% url 'todo-status-change' task_id=todo.task_id %}">{% csrf_token %}
                     <span id="todo-status-{{ todo.task_id }}">
-                      <button class="button-toggle btn p-0 d-flex justify-content-center button-status" type="button">
+                      <input type="text" name="status-{{ todo.task_id }}" value="{{ todo.status }}" style="display: none;">
+                      <button class="button-toggle p-0 d-flex justify-content-center" type="button">
                         <i class='bx bx-circle icon-default'></i>
                         <i class='bx bx-check-circle icon-hover'></i>
                         <i class='bx bxs-check-circle icon-disable'></i>
