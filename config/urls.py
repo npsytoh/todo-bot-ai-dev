@@ -7,7 +7,7 @@ from django.urls import include
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('todo-bot-ai/', include('todo.urls')),
+    path('', include('todo.urls')),
 ]
 
 if settings.DEBUG:
@@ -17,4 +17,5 @@ if settings.DEBUG:
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
 
-        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+        urlpatterns = [
+            path("__debug__/", include(debug_toolbar.urls))] + urlpatterns

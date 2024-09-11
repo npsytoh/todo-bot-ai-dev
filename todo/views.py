@@ -65,6 +65,19 @@ class TodoStatusChangeView(generic.FormView):
         return redirect(self.success_url)
 
 
+class TodoItemPostView(generic.FormView):
+    model = TodoItems
+    success_url = reverse_lazy('todo-main')
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        task_id = self.kwargs.get('task_id')
+        obj = get_object_or_404(self.model, task_id=task_id)
+        print(obj.task_title, obj.status,
+              request.POST.get('itemStatus'))
+        return redirect(self.success_url)
+
+
 class TodoEditView(generic.UpdateView):
     model = TodoItems
     form_class = TodoEditModelForm

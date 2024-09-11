@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-10 pe-0">
             <span>
-              <input type="text" name="{{ form.task_title.html_name }}" class="form-control shadow-sm border border-0" placeholder="タスクを入力..." maxlength="255" autofocus />
+              <input type="text" name="{{ form.task_title.html_name }}" class="form-control shadow-sm border border-0" placeholder="タスクを入力..." maxlength="255" autofocus="autofocus"/>
             </span>
           </div>
           <div class="col-2">
@@ -34,33 +34,19 @@
   </section>
   <section class="flex-grow-1 mx-5 mb-3">
     <div class="table-container d-flex flex-column h-100 shadow-sm">
-      {% comment %} <div class="thead-wrapper m-0">
-        <table class="table table-header m-0">
-          <thead>
-            <th scope="col" style="width: 5%"></th>
-            <th scope="col" style="width: 50%">タイトル</th>
-            <th scope="col" style="width: 10%">期限日</th>
-            <th scope="col" style="width: 10%">重要度</th>
-            <th scope="col" style="width: 10%">優先度</th>
-            <th scope="col" style="width: 15%"></th>
-          </thead>
-        </table>
-      </div> {% endcomment %}
       <div class="tbody-wrapper m-0 flex-grow-1 overflow-y-auto">
         <table class="table table-hover align-middle m-0">
           <tbody>
             {% for todo in todo_list %}
               <tr>
                 <td style="width: 5%">
-                  <form method="post" action="{% url 'todo-status-change' task_id=todo.task_id %}">{% csrf_token %}
-                    <span id="todo-status-{{ todo.task_id }}">
-                      <input type="text" name="status-{{ todo.task_id }}" value="{{ todo.status }}" style="display: none;">
-                      <button class="button-toggle p-0 d-flex justify-content-center" type="button">
-                        <i class='bx bx-circle icon-default'></i>
-                        <i class='bx bx-check-circle icon-hover'></i>
-                        <i class='bx bxs-check-circle icon-disable'></i>
-                      </button>
-                    </span>
+                  <form method="post" action="{% url 'todo-item-post' task_id=todo.task_id %}">{% csrf_token %}
+                    <input type="text" name="status-{{ todo.task_id }}" style="display: none;">
+                    <button class="button-toggle d-flex" type="button">
+                      <i class='bx bx-circle icon-default'></i>
+                      <i class='bx bx-check-circle icon-hover'></i>
+                      <i class='bx bxs-check-circle icon-disable'></i>
+                    </button>
                   </form>
                 </td>
                 <td>
