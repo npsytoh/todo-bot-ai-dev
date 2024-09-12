@@ -40,12 +40,15 @@
             {% for todo in todo_list %}
               <tr>
                 <td style="width: 5%">
-                  <form method="post" action="{% url 'todo-item-post' task_id=todo.task_id %}">{% csrf_token %}
-                    <input type="text" name="status-{{ todo.task_id }}" style="display: none;">
+                  <form method="post" action="{% url 'todo-item-post' task_id=todo.task_id target_field='status' %}">{% csrf_token %}
                     <button class="button-toggle d-flex" type="button">
                       <i class='bx bx-circle icon-default'></i>
                       <i class='bx bx-check-circle icon-hover'></i>
-                      <i class='bx bxs-check-circle icon-disable'></i>
+                      {% if todo.status %}
+                        <i class='bx bxs-check-circle icon-enable'></i>
+                      {% else %}
+                        <i class='bx bxs-check-circle icon-disable'></i>
+                      {% endif %}
                     </button>
                   </form>
                 </td>
@@ -57,10 +60,16 @@
                 <td style="width: 10%">
                   <ul class="functions">
                     <li class="function-item">
-                      <button class="button-toggle" type="button">
-                        <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
-                        <i class='bx bxs-star icon-disable'></i>
-                      </button>
+                      <form method="post" action="{% url 'todo-item-post' task_id=todo.task_id target_field='important' %}">{% csrf_token %}
+                        <button class="button-toggle" type="button">
+                          <i class='bx bx-star icon-default' aria-label="重要タスク"></i>
+                          {% if todo.is_important %}
+                            <i class='bx bxs-star icon-enable'></i>
+                          {% else %}
+                            <i class='bx bxs-star icon-disable'></i>
+                          {% endif %}
+                        </button>
+                      </form>
                     </li>
                     <li class="function-item">
                       <button type="link">

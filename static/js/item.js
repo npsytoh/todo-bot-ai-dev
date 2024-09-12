@@ -16,26 +16,20 @@ const postFormData = (form, data) => {
 	};
 	fetch(action, options).then((e) => {
 		if (e.status === 200) {
-			console.log('[' + Date(Date.now()) + '] post success.');
+			console.log('[' + Date(Date.now()) + '] POST success.');
 			return;
 		}
-		console.log('[' + Date(Date.now()) + '] post failed.');
+		console.log('[' + Date(Date.now()) + '] POST failed.');
 	});
 };
 
 itemButtons.forEach((button) => {
 	button.addEventListener('click', () => {
 		const lastChild = button.lastElementChild;
-		const isDisable = lastChild.classList.contains('icon-disable');
-
-		if (isDisable) {
-			console.log('完了しました');
-		} else {
-			console.log('完了キャンセル');
-		}
+		const isEnable = lastChild.classList.contains('icon-disable');
 
 		const additionalData = {
-			itemStatus: isDisable,
+			itemState: isEnable,
 		};
 		const form = button.closest('form');
 		postFormData(form, additionalData);
