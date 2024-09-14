@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 
 from .models import TodoItems
-from .forms import TodoCompletedModelForm
 from .forms import TodoCreateModelForm
 from .forms import TodoEditModelForm
 
@@ -25,8 +24,7 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
 
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset(**kwargs)
-        # queryset = queryset.filter(status=False).order_by('-updated_at')
-        queryset = queryset.order_by('-updated_at')
+        queryset = queryset.filter(status=False).order_by('-updated_at')
         for data in queryset:
             if data.due_date is None:
                 data.due_date = '-'
@@ -44,26 +42,6 @@ class TodoMainView(generic.ListView, generic.edit.ModelFormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
-
-# class TodoStatusChangeView(generic.FormView):
-#     model = TodoItems
-#     form_class = TodoCompletedModelForm
-#     success_url = reverse_lazy('todo-main')
-#     http_method_names = ['post']
-
-#     def post(self, request, *args, **kwargs):
-#         task_id = self.kwargs.get('task_id')
-#         obj = get_object_or_404(TodoItems, task_id=task_id)
-#         field_name = f'status_{task_id}'
-#         if field_name in request.POST:
-#             obj.status = request.POST.get(field_name) == "on"
-#             obj.completed_at = dt.datetime.now()
-#         else:
-#             obj.status = False
-#             obj.completed_at = None
-#         obj.save()
-#         return redirect(self.success_url)
 
 
 class TodoItemPostView(generic.FormView):
