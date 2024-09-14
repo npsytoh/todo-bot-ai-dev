@@ -2,16 +2,6 @@ from django import forms
 from .models import TodoItems
 
 
-class TodoCompletedModelForm(forms.ModelForm):
-    class Meta:
-        model = TodoItems
-        fields = ['status']
-        widgets = {
-            'status': forms.CheckboxInput(attrs={
-                'class': 'form-check-input',
-            })
-        }
-
 class TodoCreateModelForm(forms.ModelForm):
     class Meta:
         model = TodoItems
