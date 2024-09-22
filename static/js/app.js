@@ -5,20 +5,3 @@ window.onload = () => {
 		sideBarContent.classList.toggle('d-none');
 	});
 };
-
-const todoCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-
-const changeClass = (element) => {
-	const todoTitle = document.getElementById(element.id.replace('status', 'title'));
-	todoTitle.classList.toggle('text-decoration-line-through');
-};
-
-todoCheckboxes.forEach((checkbox) => {
-	checkbox.addEventListener('change', () => {
-		const parentElement = checkbox.closest('span');
-		changeClass(parentElement);
-
-		const parentForm = checkbox.closest('form');
-		postFormData(parentForm);
-	});
-});

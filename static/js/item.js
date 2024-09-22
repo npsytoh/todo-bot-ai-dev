@@ -1,4 +1,19 @@
-const itemButtons = document.querySelectorAll('.button-toggle');
+const onClickToggleButton = (button) => {
+	const lastChild = button.lastElementChild;
+	const isEnable = lastChild.classList.contains('icon-disable');
+
+	const additionalData = {
+		itemState: isEnable,
+	};
+	const form = button.closest('form');
+	postFormData(form, additionalData);
+
+	lastChild.classList.toggle('icon-disable');
+	lastChild.classList.toggle('icon-enable');
+
+	const itemTitle = button.closest('td').nextElementSibling;
+	itemTitle.classList.toggle('text-decoration-line-through');
+};
 
 const postFormData = (form, data) => {
 	const formData = new FormData(form);
@@ -23,18 +38,10 @@ const postFormData = (form, data) => {
 	});
 };
 
+const itemButtons = document.querySelectorAll('.button-toggle');
+
 itemButtons.forEach((button) => {
 	button.addEventListener('click', () => {
-		const lastChild = button.lastElementChild;
-		const isEnable = lastChild.classList.contains('icon-disable');
-
-		const additionalData = {
-			itemState: isEnable,
-		};
-		const form = button.closest('form');
-		postFormData(form, additionalData);
-
-		lastChild.classList.toggle('icon-disable');
-		lastChild.classList.toggle('icon-enable');
+		onClickToggleButton(button);
 	});
 });
